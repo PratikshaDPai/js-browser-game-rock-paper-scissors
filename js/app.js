@@ -18,11 +18,24 @@
 //    Clearly indicate who won
 
 /*-------------------------------- Constants --------------------------------*/
-
+const choices = ["rock", "paper", "scissors"];
 /*-------------------------------- Variables --------------------------------*/
-
+let playerChoice;
+let computerChoice;
+let msg;
 /*------------------------ Cached Element References ------------------------*/
-
+const resultDisplayEl = document.querySelector("#result-display");
 /*-------------------------------- Functions --------------------------------*/
+const getPlayerChoice = (event) => {
+  playerChoice = event.target.id;
+};
+
+const play = (event) => {
+  getPlayerChoice(event);
+  console.log(playerChoice);
+};
 
 /*----------------------------- Event Listeners -----------------------------*/
+document.querySelectorAll("button").forEach(function (button) {
+  button.addEventListener("click", play);
+});
