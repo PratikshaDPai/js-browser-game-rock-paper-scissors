@@ -21,11 +21,20 @@
 const choices = ["rock", "paper", "scissors"];
 const quotes = {
   rock: [
-    "In the middle of every difficulty lies opportunity. – Albert Einstein",
-    "The greatest glory in living lies not in never falling, but in rising every time we fall. – Nelson Mandela",
-    "A gem cannot be polished without friction, nor a man perfected without trials. – Seneca",
-    "Stand firm as a rock, and the waves of life will crash around you, but never break you.",
-    "Strength does not come from winning. Your struggles develop your strengths. – Arnold Schwarzenegger",
+    "Hardships often prepare ordinary people for an extraordinary destiny. – C.S. Lewis",
+    "Persistence and resilience only come from having been given the chance to work through difficult problems. – Gever Tulley",
+    "A river cuts through rock, not because of its power, but because of its persistence. – James N. Watkins",
+    "The strongest rocks are formed under the greatest pressure.",
+    "Storms make trees take deeper roots.",
+    "Be as solid as a rock, unshaken by the winds of change.",
+    "Some are born strong, others are forged in the fires of adversity.",
+    "It is not the mountain we conquer, but ourselves. – Sir Edmund Hillary",
+    "Rocks do not move with the tide; they stand strong against the waves.",
+    "Strength grows in the moments when you think you can't go on but keep going anyway.",
+    "A diamond is just a rock that never gave up.",
+    "The world breaks everyone, and afterward, some are strong at the broken places. – Ernest Hemingway",
+    "The foundation of greatness is built on the stones of perseverance.",
+    "To break a rock, you must strike it a thousand times—but on the thousand and first, it shatters.",
   ],
   paper: [
     "The pen is mightier than the sword. – Edward Bulwer-Lytton",
@@ -33,6 +42,20 @@ const quotes = {
     "Words are, of course, the most powerful drug used by mankind. – Rudyard Kipling",
     "Paper holds the greatest weapon of all—ideas.",
     "A single sheet of paper can contain the wisdom of a thousand lifetimes.",
+    "An idea, like a ghost, must be spoken to a little before it will explain itself. – Charles Dickens",
+    "The pages of history are written by those who dare to dream and act.",
+    "A single word can start a war, but a single page can end one.",
+    "Knowledge is the most powerful tool in the universe—it never dulls, never breaks, and never runs out.",
+    "The strongest warriors are not always the ones with swords, but the ones with pens.",
+    "One book, one pen, one child, and one teacher can change the world. – Malala Yousafzai",
+    "The best way to predict the future is to create it. – Peter Drucker",
+    "A blank page is full of possibilities—what you write on it determines your destiny.",
+    "Paper may be fragile, but what is written on it can last forever.",
+    "Words can be sharper than swords, stronger than armies, and louder than explosions.",
+    "The truth written down will outlast even the most unbreakable stone.",
+    "Ink and paper are the tools of the wise, shaping the world without a single blow.",
+    "Paper is the quietest and most powerful voice in the world.",
+    "The scrolls of wisdom are mightier than the walls of fortresses.",
   ],
   scissors: [
     "If you want to achieve greatness, stop asking for permission and start cutting through the noise.",
@@ -60,9 +83,11 @@ let playerChoice;
 let computerChoice;
 let msg;
 let quote;
+let isLost = false;
 /*------------------------ Cached Element References ------------------------*/
 const resultDisplayEl = document.querySelector("#result-display");
 const quoteElement = document.querySelector("#quote");
+const messageElement = document.querySelector("#message");
 /*-------------------------------- Functions --------------------------------*/
 const getPlayerChoice = (event) => {
   playerChoice = event.currentTarget.id; //make sure to log button id even if svg is clicked
@@ -75,6 +100,7 @@ const determineWinner = () => {
   if (playerChoice === computerChoice) {
     msg = "It's a Tie!";
     quote = getRandomQuote("tie");
+    isLost = false;
   } else if (
     (playerChoice === choices[0] && computerChoice === choices[2]) ||
     (playerChoice === choices[1] && computerChoice === choices[0]) ||
@@ -82,9 +108,11 @@ const determineWinner = () => {
   ) {
     quote = getRandomQuote(playerChoice);
     msg = "Congrats! You win!";
+    isLost = false;
   } else {
     msg = "You lose! Try again?";
     quote = getRandomQuote(computerChoice);
+    isLost = true;
   }
 };
 
@@ -92,10 +120,24 @@ function getRandomQuote(winner) {
   const category = quotes[winner]; // Get the relevant category
   return category[Math.floor(Math.random() * category.length)]; // Pick a random quote
 }
+function toggleLossEffect(isLost) {
+  if (isLost) {
+    document.body.classList.add("lose"); // Apply pinkish-red background
+    document.querySelectorAll("button").forEach(function (button) {
+      button.classList.add("lose");
+    });
+  } else {
+    document.body.classList.remove("lose"); // Revert to sage green
+    document.querySelectorAll("button").forEach(function (button) {
+      button.classList.remove("lose");
+    });
+  }
+}
 
 const render = () => {
-  resultDisplayEl.textContent = `You chose ${playerChoice} and the computer chose ${computerChoice}. ${msg}`;
+  resultDisplayEl.textContent = `You chose ${playerChoice} and the computer chose ${computerChoice}`;
   quoteElement.textContent = `${quote}`;
+  messageElement.textContent = msg;
   console.log(quote); // Displays a random  quote
 };
 
@@ -108,6 +150,7 @@ const play = (event) => {
   );
   determineWinner(); // determines winning result
   console.log(`determineWinner.successful. Computed message: ${msg}`);
+  toggleLossEffect(isLost);
   render(); // renders result message back to the user
 };
 

@@ -20,11 +20,16 @@ body {
   color: rgb(1, 61, 61);
 }
 
+body.lose {
+  background: linear-gradient(to right, #ff8c8c, #ff5757); /* Pinkish Red */
+}
+
 h1 {
   display: flex;
   align-self: center;
 }
-header {
+header,
+footer {
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -54,6 +59,10 @@ button {
   width: 100px;
   height: 100px;
   border-radius: 50%;
+}
+
+button.lose {
+  background: linear-gradient(45deg, #ff8b97, #fbabdf);
 }
 
 @media screen and (max-width: 768px) {
