@@ -42,4 +42,4 @@ Welcome to **Rock Paper Scissors**, a web-based game that not only lets you batt
 1. Clone the repository:
 
    git clone https://github.com/pratikshadpai/js-browser-game-rock-paper-scissors.git
-   cd js-browser-game-rock-paper-scissors
+
