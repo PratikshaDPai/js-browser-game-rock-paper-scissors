@@ -27,12 +27,7 @@ let msg;
 const resultDisplayEl = document.querySelector("#result-display");
 /*-------------------------------- Functions --------------------------------*/
 const getPlayerChoice = (event) => {
-  playerChoice = event.target.id;
-};
-
-const play = (event) => {
-  getPlayerChoice(event);
-  console.log(playerChoice);
+  playerChoice = event.currentTarget.id; //make sure to log button id even if svg is clicked
 };
 const getComputerChoice = () => {
   const randomIndex = Math.floor(Math.random() * choices.length);
@@ -40,7 +35,7 @@ const getComputerChoice = () => {
 };
 const determineWinner = () => {
   if (playerChoice === computerChoice) {
-    msg = "You tied!";
+    msg = "It's a Tie!";
   } else if (playerChoice === choices[0] && computerChoice === choices[2]) {
     // "rock" vs. "scissors"
     msg = "Congrats! You win!";
@@ -53,6 +48,22 @@ const determineWinner = () => {
   } else {
     msg = "You lose! Try again?";
   }
+};
+
+const render = () => {
+  resultDisplayEl.textContent = `You chose ${playerChoice} and the computer chose ${computerChoice}. ${msg}`;
+};
+
+const play = (event) => {
+  getPlayerChoice(event);
+  console.log(`getPlayerChoice.successful. Player choice: ${playerChoice}`);
+  getComputerChoice(); // randomly selects computers choice, updates state
+  console.log(
+    `getComputerChoice.successful. Computer choice: ${computerChoice}`
+  );
+  determineWinner(); // determines winning result
+  console.log(`determineWinner.successful. Computed message: ${msg}`);
+  render(); // renders result message back to the user
 };
 
 /*----------------------------- Event Listeners -----------------------------*/
