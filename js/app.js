@@ -38,6 +38,22 @@ const getComputerChoice = () => {
   const randomIndex = Math.floor(Math.random() * choices.length);
   computerChoice = choices[randomIndex];
 };
+const determineWinner = () => {
+  if (playerChoice === computerChoice) {
+    msg = "You tied!";
+  } else if (playerChoice === choices[0] && computerChoice === choices[2]) {
+    // "rock" vs. "scissors"
+    msg = "Congrats! You win!";
+  } else if (playerChoice === choices[1] && computerChoice === choices[0]) {
+    // "paper" vs. "rock"
+    msg = "Congrats! You win!";
+  } else if (playerChoice === choices[2] && computerChoice === choices[1]) {
+    // "scissors" vs. "paper"
+    msg = "Congrats! You win!";
+  } else {
+    msg = "You lose! Try again?";
+  }
+};
 
 /*----------------------------- Event Listeners -----------------------------*/
 document.querySelectorAll("button").forEach(function (button) {
