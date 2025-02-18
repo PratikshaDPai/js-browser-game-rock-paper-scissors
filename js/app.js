@@ -34,6 +34,10 @@ const play = (event) => {
   getPlayerChoice(event);
   console.log(playerChoice);
 };
+const getComputerChoice = () => {
+  const randomIndex = Math.floor(Math.random() * choices.length);
+  computerChoice = choices[randomIndex];
+};
 
 /*----------------------------- Event Listeners -----------------------------*/
 document.querySelectorAll("button").forEach(function (button) {
