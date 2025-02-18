@@ -17,6 +17,7 @@ body {
   border-radius: 15px;
   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
   transition: background 1s ease-in-out;
+  color: rgb(1, 61, 61);
 }
 
 h1 {
@@ -35,6 +36,10 @@ header {
 #result-display {
   min-height: 20px;
   margin-left: 10%;
+}
+
+#quote {
+  font-family: "Grechen Fuemen";
 }
 
 button {
@@ -57,6 +62,10 @@ button {
     width: 100%; /* Full width on mobile */
     touch-action: manipulation; /* Improves touch response */
     -webkit-tap-highlight-color: transparent; /* Removes tap highlight on iOS */
+  }
+
+  header {
+    font-size: larger;
   }
 }
 
